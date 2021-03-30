@@ -15,7 +15,7 @@ listenAndServe(options, (request) => {
 
   const start = new Date()
   const url = `https://${request.url.substring(1)}`
-  let completed = false;
+  let completed = false
 
   const p = Deno.run({
     cmd: [ "deno", "run", url ],
@@ -36,11 +36,11 @@ listenAndServe(options, (request) => {
   // once the request is done (or cancelled)
   Deno.readAll(request.r).then(async () => {
     // if the process hasn't completed, end it
-    if (!completed) p.kill(1)
+    if (!completed) p.kill(2)
   })
 
-  // don't let requests run 
+  // don't let requests run indefinitely
   setTimeout(() => {
-    if (!completed) p.kill(1)
+    if (!completed) p.kill(2)
   }, 10*1000)
 });
