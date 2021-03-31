@@ -33,7 +33,7 @@ listenAndServe(options, (request) => {
     console.log({ url, time: `${elapsed}ms` })
   })
 
-  // once the request is done (or cancelled)
+  // once the request is done (or canceled)
   Deno.readAll(request.r).then(async () => {
     // if the process hasn't completed, end it
     if (!completed) p.kill(2)
